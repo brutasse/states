@@ -8,7 +8,8 @@ remote debugging. If you don't need this, simply change ``salt-raven`` to
 .. _Salt: http://saltstack.org/
 .. _Sentry: http://sentry.readthedocs.org/
 
-Usage:
+Installation
+------------
 
 * On a bare ubuntu machine, create a ``$HOME/salt`` folder and clone this repo
   in it.
@@ -34,3 +35,14 @@ Usage:
 And to create minions, set their hostnames and do::
 
     env/bin/fab -H <minion ip> enable_salt:minion
+
+Usage
+-----
+
+You need some pillar data:
+
+* ``index_url``: the index from which you'll install python packages.
+
+* ``user``: the user in which home directory salt is installed.
+
+* ``salt_sentry_dsn``: the Sentry DSN for logging what happens in salt.
