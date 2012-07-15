@@ -1,2 +1,2 @@
-{% if index_url }}--index-url={{ index_url }}{% endif %}
+{% if index_url %}--index-url={{ index_url }}{% endif %}
 salt-raven=={{ salt_version }}
