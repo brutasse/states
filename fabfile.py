@@ -29,8 +29,8 @@ def enable_salt(mode):
         die("`mode` can only be 'master' or 'minion'")
     sudo('apt-get update')
 
-    sudo('apt-get -y install libzmq-dev python-virtualenv supervisor swig'
-         'build-essential python-dev')
+    sudo('apt-get -y install libzmq-dev python-virtualenv supervisor swig '
+         'python-m2crypto build-essential python-dev')
     run('mkdir -p salt')
     with cd('salt'):
         if not exists('env/bin/pip'):

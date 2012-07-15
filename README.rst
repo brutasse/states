@@ -30,7 +30,8 @@ Installation
 
 * Bootstrap the master::
 
-      env/bin/fab -H <master ip> enable_salt:master
+      cd states
+      ../env/bin/fab -H <master ip> enable_salt:master
 
 And to create minions, set their hostnames and do::
 
