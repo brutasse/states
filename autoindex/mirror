@@ -1,0 +1,2 @@
+{% for package in pillar['autoindex']['packages'] %}{{ package }}
+{% endfor %}

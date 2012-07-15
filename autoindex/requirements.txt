@@ -1,0 +1,2 @@
+{% if pillar['index_url'] %}--index-url={{ index_url }}{% endif %}
+autoindex=={{ autoindex_version }}
