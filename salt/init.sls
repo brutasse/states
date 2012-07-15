@@ -9,6 +9,6 @@ salt:
     - name: /home/{{ pillar['user'] }}/salt/requirements.txt
     - source: salt://salt/requirements.txt
     - template: jinja
-    - context:
-      salt_version: "0.10.1"
-      index_url: {{ pillar['index_url'] }}
+    - defaults:
+        salt_version: "0.10.1"
+        index_url: {{ pillar['index_url'] }}
