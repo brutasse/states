@@ -20,4 +20,4 @@ run-salt-master:
     - source: salt://salt/salt.conf
     - template: jinja
     - defaults:
-        mode: master
+        run_mode: master

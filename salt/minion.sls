@@ -20,4 +20,4 @@ run-salt-minion:
     - source: salt://salt/salt.conf
     - template: jinja
     - defaults:
-        mode: minion
+        run_mode: minion
