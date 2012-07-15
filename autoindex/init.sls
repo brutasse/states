@@ -29,15 +29,24 @@ autoindex-requirements:
     - require:
       - file: autoindex
 
+autoindex-public:
+  file.directory:
+    - name: /home/{{ pillar['user'] }}/autoindex/public
+    - recurse: True
+    - user: {{ pillar['user'] }}
+
 autoindex-mirror:
   file.managed:
     - name: /home/{{ pillar['user'] }}/autoindex/public/mirror
     - source: salt://autoindex/mirror
-    - makedirs: True
+    - user: {{ pillar['user'] }}
     - template: jinja
+    - require:
+      - file: autoindex-public
   cmd.wait:
     - name: env/bin/autoindex mirror -d public
     - cwd: /home/{{ pillar['user'] }}/autoindex
+    - user: {{ pillar['user'] }}
     - require:
       - cmd: autoindex-watch
     - watch:
