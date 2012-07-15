@@ -16,7 +16,7 @@ autoindex:
     - require:
       - virtualenv: autoindex
     - watch:
-      - autoindex-requirements
+      - file: autoindex-requirements
 
 autoindex-requirements:
   file.managed:
