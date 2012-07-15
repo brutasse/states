@@ -25,7 +25,7 @@ Installation
 * Create a virtualenv and install ``Fabric`` in it::
 
       cd $HOME/salt
-      virtualenv env
+      virtualenv env --system-site-packages
       env/bin/pip install Fabric
 
 * Bootstrap the master::
