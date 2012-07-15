@@ -19,5 +19,5 @@ run-salt-master:
     - name: /etc/supervisor/conf.d/salt-master.conf
     - source: salt://salt/salt.conf
     - template: jinja
-    - context:
-      mode: master
+    - defaults:
+        mode: master

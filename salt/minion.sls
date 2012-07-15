@@ -19,5 +19,5 @@ run-salt-minion:
     - name: /etc/supervisor/conf.d/salt-minion.conf
     - source: salt://salt/salt.conf
     - template: jinja
-    - context:
-      mode: minion
+    - defaults:
+        mode: minion
