@@ -37,6 +37,7 @@ autoindex-mirror:
     - template: jinja
   cmd.wait:
     - name: env/bin/autoindex mirror -d public
+    - cwd: /home/{{ pillar['user'] }}/autoindex
     - require:
       - cmd: autoindex-watch
     - watch:
