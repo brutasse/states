@@ -35,7 +35,7 @@ Installation
 
 And to create minions, set their hostnames and do::
 
-    env/bin/fab -H <minion ip> enable_salt:minion
+    ../env/bin/fab -H <minion ip> enable_salt:minion
 
 Usage
 -----
