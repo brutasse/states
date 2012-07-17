@@ -22,11 +22,11 @@ Installation
 
   (``env.index_url`` is optional if you're not installing ``salt-raven``).
 
-* Create a virtualenv and install ``Fabric`` in it::
+* Create a virtualenv and install ``Fabric`` and ``Jinja2`` in it::
 
       cd $HOME/salt
       virtualenv env --system-site-packages
-      env/bin/pip install Fabric
+      env/bin/pip install Fabric Jinja2
 
 * Bootstrap the master::
 
@@ -42,8 +42,20 @@ Usage
 
 You need some pillar data:
 
+* ``salt.master``: the IP / resolvable hostname of your salt master.
+
 * ``index_url``: the index from which you'll install python packages.
 
 * ``user``: the user in which home directory salt is installed.
 
-* ``salt_sentry_dsn``: the Sentry DSN for logging what happens in salt.
+* ``salt.sentry_dsn``: (optional) the Sentry DSN for logging what happens in
+  salt.
+
+This looks like this::
+
+    user: example
+    index_url: http://pypi.python.org/simple
+
+    salt:
+      master: 192.168.1.0
+      sentry_dsn: https://…

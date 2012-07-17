@@ -49,12 +49,26 @@ def enable_salt(mode):
     sudo('mkdir -p /etc/salt')
     user = run('whoami')
 
-    upload_template('%s.template' % mode, '/etc/salt/%s' % mode,
-                    context={'salt_master': SALT_MASTER, 'user': user},
-                    use_sudo=True)
-    upload_template('supervisor.conf',
+    context = {
+        'pillar': {
+            'salt': {
+                'master': SALT_MASTER,
+            },
+            'user': user,
+        },
+    }
+    upload_template('salt/%s.template' % mode, '/etc/salt/%s' % mode,
+                    context=context, use_sudo=True, use_jinja=True)
+
+    context = {
+        'run_mode': mode,
+        'pillar': {
+            'user': user,
+        },
+    }
+    upload_template('salt/salt.conf',
                     '/etc/supervisor/conf.d/salt-%s.conf' % mode,
-                    context={'mode': mode, 'user': user}, use_sudo=True)
+                    context=context, use_sudo=True, use_jinja=True)
     out = sudo('supervisorctl update')
     if not out:
         sudo('supervisorctl restart salt-%s' % mode)

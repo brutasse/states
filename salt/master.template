@@ -79,11 +79,11 @@
 # Default:
 file_roots: 
   base:
-    - /home/%(user)s/salt/states
+    - /home/{{ pillar['user'] }}/salt/states
 
 pillar_roots:
   base:
-    - /home/%(user)s/salt/pillar
+    - /home/{{ pillar['user'] }}/salt/pillar
 
 # The hash_type is the hash to use when discovering the hash of a file on
 # the master server, the default is md5, but sha1, sha224, sha256, sha384
