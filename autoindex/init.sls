@@ -32,7 +32,8 @@ autoindex-requirements:
 autoindex-public:
   file.directory:
     - name: /home/{{ pillar['user'] }}/autoindex/public
-    - recurse: True
+    - recurse:
+      - user
     - user: {{ pillar['user'] }}
 
 autoindex-mirror:
