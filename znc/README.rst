@@ -30,19 +30,20 @@ to run on and add some pillar data::
         nickname2:
           # etc etc
 
-To generate a password hash, use this python22 snippet::
+To generate a password hash, use this python snippet::
 
+    import getpass
     import hashlib
     import string
 
     from random import SystemRandom
 
-    raw_password = raw_input("Password: ")
+    raw_password = getpass.getpass()
 
     salt_chars = string.ascii_letters + string.digits
     random = SystemRandom()
     salt = "".join([random.choice(salt_chars) for i in range(20)])
-    print "sha256#{hash}#{salt}#".format(
-        hash=hashlib.sha256(raw_password+salt).hexdigest(),
+    print("sha256#{hash}#{salt}#".format(
+        hash=hashlib.sha256((raw_password+salt).encode('utf-8')).hexdigest(),
         salt=salt
-    )
+    ))
