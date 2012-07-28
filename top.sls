@@ -5,3 +5,4 @@ base:
   "linode.renie.fr":
     - salt.master
     - autoindex
+    - znc
