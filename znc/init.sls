@@ -13,3 +13,5 @@ znc:
     - source: salt://znc/znc.conf
     - template: jinja
     - makedirs: True
+    - user: {{ pillar['user'] }}
+    - group: {{ pillar['user'] }}
