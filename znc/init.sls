@@ -3,6 +3,7 @@ znc:
     - installed
   cmd.run:
     - user: {{ pillar['user'] }}
+    - cwd: /home/{{ pillar['user'] }}
     - unless: pgrep znc
     - require:
       - pkg: znc
