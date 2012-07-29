@@ -1,0 +1,13 @@
+{% for server in pillar['bind']['nameservers'] %}
+ms-dns {{ server }}
+{% endfor %}
+
+asyncmap 0
+noauth
+crtscts
+lock
+hide-password
+modem
+lcp-echo-interval 30
+lcp-echo-failure 4
+noipx
