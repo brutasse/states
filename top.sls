@@ -7,3 +7,4 @@ base:
     - autoindex
     - znc
     - iptables
+    - pptp
