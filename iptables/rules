@@ -1,0 +1,54 @@
+*filter
+
+# Flush
+-F
+
+# Policies
+-P INPUT DROP
+-P FORWARD ACCEPT
+
+# Allow all loopback (lo0) traffic
+-A INPUT -i lo -j ACCEPT
+
+# Accept all established inbound connections
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Drop all traffic to 127/8 that doesn't use lo0
+-A INPUT ! -i lo -d 127.0.0.0/8 -j DROP
+
+# Allow all outbound traffic
+-A OUTPUT -j ACCEPT
+
+# Allow ping
+-A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
+
+{% if not 'ssh' in pillar['iptables'] or pillar['iptables']['ssh'] == True %}
+# Allow SSH traffic
+-A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
+{% endif %}
+
+{% for port in pillar['iptables']['tcp_ports'] %}
+-A INPUT -p tcp --dport {{ port }} -j ACCEPT
+{% endfor %}
+
+{% if pillar['iptables']['forward'] %}
+-A INPUT -i {{ pillar['iptables']['forward']['interface'] }} -j ACCEPT
+-A OUTPUT -o {{ pillar['iptables']['forward']['interface'] }} -j ACCEPT
+-A INPUT -p {{ pillar['iptables']['forward']['port'] }} -j ACCEPT
+-A OUTPUT -p {{ pillar['iptables']['forward']['port'] }} -j ACCEPT
+-F FORWARD
+-A FORWARD -j ACCEPT
+{% endif %}
+
+# Everything else is forbidden
+-A INPUT -j DROP
+
+COMMIT
+
+{% if pillar['iptables']['nat'] %}
+*nat
+{% for interface in pillar['iptables']['nat'] %}
+-A POSTROUTING -o {{ interface }} -j MASQUERADE
+{% endfor %}
+COMMIT
+{% endif %}
