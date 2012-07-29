@@ -4,7 +4,7 @@ pptpd:
   service.running:
     - enabled: True
     - watch:
-      - file: pptptd
+      - file: pptpd
       - file: pptpd-secrets
   file.managed:
     - name: /etc/pptpd.conf
