@@ -6,3 +6,4 @@ base:
     - salt.master
     - autoindex
     - znc
+    - iptables
