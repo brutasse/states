@@ -1,10 +1,6 @@
 iptables:
   pkg:
     - installed
-  service.running:
-    - enabled: True
-    - require:
-      - pkg: iptables
   file.managed:
     - name: /etc/iptables.rules
     - source: salt://iptables/rules
