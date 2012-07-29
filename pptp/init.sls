@@ -17,5 +17,5 @@ pptpd-secrets:
   file.managed:
     - name: /etc/ppp/chap-secrets
     - mode: 600
-    - source: salt://pptpd/chap-secrets
+    - source: salt://pptp/chap-secrets
     - template: jinja
