@@ -8,6 +8,7 @@ bind9:
   file.managed:
     - name: /etc/resolv.conf
     - source: salt://bind/resolv.conf
+    - template: jinja
 
 bind9-forwarders:
   file.managed:
