@@ -33,11 +33,7 @@
 
 {% if pillar['iptables']['forward'] %}
 -A INPUT -i {{ pillar['iptables']['forward']['interface'] }} -j ACCEPT
--A OUTPUT -o {{ pillar['iptables']['forward']['interface'] }} -j ACCEPT
 -A INPUT -p {{ pillar['iptables']['forward']['port'] }} -j ACCEPT
--A OUTPUT -p {{ pillar['iptables']['forward']['port'] }} -j ACCEPT
--F FORWARD
--A FORWARD -j ACCEPT
 {% endif %}
 
 # Everything else is forbidden
