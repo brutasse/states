@@ -25,4 +25,4 @@ If you run a VPN you need to allow forwarded traffic by doing so::
         - ppp+
       forward:
         interface: ppp+
-        port: 47
+        protocol: 47
