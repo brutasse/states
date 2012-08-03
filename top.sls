@@ -8,3 +8,4 @@ base:
     - znc
     - iptables
     - pptp
+    - sshd
