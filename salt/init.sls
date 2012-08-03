@@ -7,6 +7,7 @@ salt:
       - file: salt
   file.managed:
     - name: /home/{{ pillar['user'] }}/salt/requirements.txt
+    - user: {{ pillar['user'] }}
     - source: salt://salt/requirements.txt
     - template: jinja
     - defaults:
