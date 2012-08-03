@@ -1,0 +1,37 @@
+Port 22
+Protocol 2
+
+{% if pillar['sshd']['users'] %}AllowUsers {% for user in pillar['sshd']['users'] %}{{ user }} {% endfor %}{% endif %}
+
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+
+UsePrivilegeSeparation yes
+KeyRegenerationInterval 3600
+ServerKeyBits 768
+SyslogFacility AUTH
+LogLevel INFO
+LoginGraceTime 10
+MaxAuthTries 1
+MaxStartups 2
+PermitRootLogin no
+StrictModes yes
+
+RSAAuthentication no
+PubkeyAuthentication yes
+IgnoreRhosts yes
+RhostsRSAAuthentication no
+HostbasedAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+KerberosAuthentication no
+GSSAPIAuthentication no
+UsePAM no
+
+X11Forwarding no
+PrintMotd no
+PrintLastLog yes
+TCPKeepAlive yes
+AcceptEnv LANG LC_*
