@@ -10,5 +10,5 @@ salt:
     - source: salt://salt/requirements.txt
     - template: jinja
     - defaults:
-        salt_version: "0.10.1"
+        salt_version: "0.10.2"
         index_url: {{ pillar['index_url'] }}

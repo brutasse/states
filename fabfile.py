@@ -12,6 +12,8 @@ with open('salt.conf', 'r') as conf:
         if key.startswith('env.'):
             env[key[4:]] = config[key]
 env.forward_agent = True
+if not 'package' in env:
+    env.package = 'salt'
 SALT_MASTER = config['SALT_MASTER']
 
 
@@ -39,11 +41,11 @@ def enable_salt(mode):
             run('virtualenv %s env' % opts)
             run('./env/bin/pip install -U pip')
         btw('Installing salt. This may take a while.')
-        cmd = './env/bin/pip install {opts} salt-raven'
+        cmd = './env/bin/pip install {opts} {package}'
         opts = ''
         if 'index_url' in env:
             opts = '-i {index_url}'.format(index_url=env.index_url)
-        cmd = cmd.format(opts=opts)
+        cmd = cmd.format(opts=opts, package=env.package)
         run(cmd)
 
     sudo('mkdir -p /etc/salt')

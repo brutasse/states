@@ -1,9 +1,17 @@
 My Salt states
 ==============
 
-This uses a modified version of `Salt`_ which adds `Sentry`_ support for
-remote debugging. If you don't need this, simply change ``salt-raven`` to
-``salt`` in the fabfile and the salt state.
+These are the `Salt`_ states I use on my personal servers. They're useful for
+things such as:
+
+* Running an IRC bouncer
+
+* Running a VPN
+
+* Running a private python package index
+
+This configuration supports installing a modified version of Salt (mine is
+called ``salt-raven`` and logs to `Sentry`_).
 
 .. _Salt: http://saltstack.org/
 .. _Sentry: http://sentry.readthedocs.org/
@@ -18,9 +26,13 @@ Installation
 
       SALT_MASTER = <salt master IP>
       env.user = <your user>
+      env.package = salt-raven
       env.index_url = <your index url for pip>
 
-  (``env.index_url`` is optional if you're not installing ``salt-raven``).
+  (``env.package`` is optional and defaults to ``salt``).
+
+  (``env.index_url`` is optional if you're not installing a custom salt
+  package).
 
 * Create a virtualenv and install ``Fabric`` and ``Jinja2`` in it::
 
@@ -40,22 +52,6 @@ And to create minions, set their hostnames and do::
 Usage
 -----
 
-You need some pillar data:
+See `salt/README.rst`_
 
-* ``salt.master``: the IP / resolvable hostname of your salt master.
-
-* ``index_url``: the index from which you'll install python packages.
-
-* ``user``: the user in which home directory salt is installed.
-
-* ``salt.sentry_dsn``: (optional) the Sentry DSN for logging what happens in
-  salt.
-
-This looks like this::
-
-    user: example
-    index_url: http://pypi.python.org/simple
-
-    salt:
-      master: 192.168.1.0
-      sentry_dsn: https://…
+.. _salt/README.rst: https://github.com/brutasse/states/tree/master/salt
