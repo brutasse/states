@@ -24,7 +24,7 @@
 
 {% if not 'ssh' in pillar['iptables'] or pillar['iptables']['ssh'] == True %}
 # Allow SSH traffic
--A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
+-A INPUT -p tcp --dport 22 --syn -m limit --limit 1/m --limit-burst 3 -j ACCEPT
 {% endif %}
 
 {% for port in pillar['iptables']['tcp_ports'] %}
