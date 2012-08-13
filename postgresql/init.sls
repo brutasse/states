@@ -5,6 +5,8 @@ postgresql:
     - name: /etc/postgresql/9.1/main/postgresql.conf
     - source: salt://postgresql/postgresql.conf
     - template: jinja
+    - user: postgres
+    - group: postgres
     - defaults:
       shared_buffers: 128MB
       work_mem: 16MB
