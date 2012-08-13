@@ -32,6 +32,7 @@ wal-e-{{ key }}:
     - name: /etc/wal-e.d/env/{{ key }}
     - source: salt://postgresql/env
     - template: jinja
+    - mode: 640
     - context:
       value: {{ value }}
     - require:
