@@ -18,6 +18,10 @@ wal-e:
     - recurse:
       - user
       - group
+  pkg.installed:
+    - names:
+      - lzop
+      - mbuffer
 
 extend:
   postgresql:
