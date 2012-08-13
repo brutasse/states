@@ -9,4 +9,4 @@ base:
     - iptables
     - pptp
     - sshd
-    - postgresql
+    - postgresql.wale
