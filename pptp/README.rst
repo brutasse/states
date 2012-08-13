@@ -16,6 +16,9 @@ set some pillar data::
         - 8.8.8.8
         - 4.4.4.4
 
+    sysctl:
+      net.ipv4.ip_forward: 1
+
 Here is how to configure it on a client:
 
 .. image:: https://github.com/brutasse/states/raw/master/pptp/vpn.png

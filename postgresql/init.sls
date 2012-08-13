@@ -1,3 +1,6 @@
+include:
+  - sysctl
+
 postgresql:
   pkg:
     - installed

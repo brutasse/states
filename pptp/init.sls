@@ -1,5 +1,6 @@
 include:
   - bind
+  - sysctl
 
 pptpd:
   pkg:
