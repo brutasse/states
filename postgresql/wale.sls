@@ -2,6 +2,7 @@ include:
   - daemontools
   - postgresql
   - virtualenv
+  - python
 
 wal-e:
   virtualenv.managed:
