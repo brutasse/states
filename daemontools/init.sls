@@ -1,0 +1,3 @@
+daemontools:
+  pkg:
+    - installed
