@@ -1,0 +1,3 @@
+python-virtualenv:
+  pkg:
+    - installed
