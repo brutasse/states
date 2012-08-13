@@ -9,6 +9,8 @@ wal-e:
     - name: /home/{{ pillar['user'] }}/wal-e
     - no_site_packages: True
     - requirements: salt://postgresql/requirements.txt
+    - require:
+      - pkg: wal-e-deps
   file.directory:
     - name: /etc/wal-e.d/env
     - user: root
@@ -18,6 +20,8 @@ wal-e:
     - recurse:
       - user
       - group
+
+wal-e-deps:
   pkg.installed:
     - names:
       - lzop
