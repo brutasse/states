@@ -10,6 +10,8 @@ things such as:
 
 * Running a private python package index
 
+* Running a PostgreSQL server with continuous archiving through WAL-E
+
 This configuration supports installing a modified version of Salt (mine is
 called ``salt-raven`` and logs to `Sentry`_).
 
@@ -52,6 +54,6 @@ And to create minions, set their hostnames and do::
 Usage
 -----
 
-See `salt/README.rst`_
+See `salt/README.rst`_ and all the state's ``README`` files.
 
 .. _salt/README.rst: https://github.com/brutasse/states/tree/master/salt
