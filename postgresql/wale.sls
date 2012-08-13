@@ -25,7 +25,7 @@ extend:
         wal_e: True
         wal_e_command: envdir /etc/wal-e.d/env /home/{{ pillar['user'] }}/wal-e/bin/wal-e
 
-{% for key, value in pillar['postgresql']['env'] %}
+{% for key, value in pillar['postgresql']['env'].iteritems() %}
 wal-e-{{ key }}:
   file.managed:
     - name: /etc/wal-e.d/env/{{ key }}
