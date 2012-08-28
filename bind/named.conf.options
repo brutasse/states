@@ -1,9 +1,14 @@
 options {
 	directory "/var/cache/bind";
+
+	query-source address * port 53;
 	
 	forwarders { {% for forwarder in pillar['bind']['nameservers'] %}
 		{{ forwarder }};{% endfor %}
 	};
+
+	forward only;
+	recursion yes;
 
 	dnssec-validation auto;
 	auth-nxdomain no;    # conform to RFC1035
