@@ -7,6 +7,7 @@ minion.
 Optionally you can add `WAL-E`_ for continuous archiving to your S3 account.
 To do so, include ``postgresql.wale`` and set some pillar data::
 
+    user: ubuntu # the user account holding the wal-e installation
     postgresql:
       env:
         AWS_SECRET_ACCESS_KEY: <secret here>
