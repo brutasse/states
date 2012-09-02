@@ -4,6 +4,8 @@ My Salt states
 These are the `Salt`_ states I use on my personal servers. They're useful for
 things such as:
 
+* Managing Salt itself
+
 * Running an IRC bouncer
 
 * Running a VPN
@@ -11,6 +13,10 @@ things such as:
 * Running a private python package index
 
 * Running a PostgreSQL server with continuous archiving through WAL-E
+
+* Running a relatively secured SSH server
+
+* Running a local DNS cache
 
 This configuration supports installing a modified version of Salt (mine is
 called ``salt-raven`` and logs to `Sentry`_).
