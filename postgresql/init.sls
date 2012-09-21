@@ -10,6 +10,7 @@ postgresql:
     - template: jinja
     - user: postgres
     - group: postgres
+    - mode: 644
     - defaults:
       shared_buffers: 128MB
       work_mem: 16MB
@@ -29,5 +30,6 @@ postgresql-hba:
     - source: salt://postgresql/pg_hba.conf
     - user: postgres
     - group: postgres
+    - mode: 644
     - require:
       - pkg: postgresql
