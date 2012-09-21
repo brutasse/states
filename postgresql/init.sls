@@ -21,3 +21,13 @@ postgresql:
     - enable: True
     - watch:
       - file: postgresql
+      - file: postgresql-hba
+
+postgresql-hba:
+  file.managed:
+    - name: /etc/postgresql/9.1/main/pg_hba.conf
+    - source: salt://postgresql/pg_hba.conf
+    - user: postgres
+    - group: postgres
+    - require:
+      - pkg: postgresql
