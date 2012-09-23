@@ -32,7 +32,7 @@ include:
 
 {{ config['http_host'] }}-requirements:
   file.managed:
-    - name: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}/requirements.txt:
+    - name: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}/requirements.txt
     - source: salt://bundle/requirements.txt
     - makedirs: True
     - defaults:
