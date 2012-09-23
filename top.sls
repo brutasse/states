@@ -11,3 +11,4 @@ base:
     - sshd
     - postgresql.wale
     - postgresql.postgis
+    - sites.geoportail
