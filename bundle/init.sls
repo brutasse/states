@@ -54,6 +54,18 @@ include:
     - unless: psql -ltA | grep '^{{ config['db_name'] }}|'
     - require:
       - cmd: postgis-template
+
+{{ config['http_host'] }}-syncdb:
+  cmd.wait:
+    - name: >
+        envdir /etc/{{ config['http_host'] }}.d
+        env/bin/django-admin.py syncdb --noinput
+    - cwd: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}
+    - watch:
+      - file: {{ config['http_host'] }}-requirements
+    - require:
+      - cmd: {{ config['http_host'] }}-db
+{% endif %}
 {% endif %}
 
 {{ config['http_host'] }}-collectstatic:
