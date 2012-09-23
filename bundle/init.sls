@@ -46,6 +46,17 @@ include:
       - virtualenv: {{ config['http_host'] }}-venv
     - watch:
       - file: {{ config['http_host'] }}-requirements
+
+{{ config['http_host'] }}-collectstatic:
+  cmd.wait:
+    - name: >
+        envdir /etc/{{ config['http_host'] }}.d
+        env/bin/django-admin.py collectstatic --noinput
+    - cwd: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}
+    - watch:
+      - file: {{ config['http_host'] }}-requirements
+    - require:
+      - cmd: {{ config['http_host'] }}-requirements
 {%- endif %}
 
 {% if config['env'] %}
