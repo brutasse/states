@@ -21,6 +21,7 @@ daemontools:
   file.managed:
     - require:
       - file: /etc/{{ name }}.d
+    - order: 1
     - source: salt://daemontools/value
     - template: jinja
     - defaults:
