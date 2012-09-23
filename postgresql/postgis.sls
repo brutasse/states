@@ -2,7 +2,7 @@ include:
   - postgresql
 
 postgis-packages:
-  pkg.installed
+  pkg.installed:
     - names:
       - postgis
       - postgresql-9.1-postgis
