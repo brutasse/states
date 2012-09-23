@@ -1,8 +1,8 @@
 My Salt states
 ==============
 
-These are the `Salt`_ states I use on my personal servers. They're useful for
-things such as:
+These are the `Salt`_ states I use on my personal servers. Fully tested on
+Ubuntu 12.04 LTS. They're useful for things such as:
 
 * Managing Salt itself
 
@@ -12,7 +12,8 @@ things such as:
 
 * Running a private python package index
 
-* Running a PostgreSQL server with continuous archiving through WAL-E
+* Running a PostgreSQL server with continuous archiving through WAL-E, PostGIS
+  support
 
 * Running a relatively secured SSH server
 
