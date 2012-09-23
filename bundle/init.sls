@@ -91,13 +91,14 @@ include:
     - name: /etc/nginx/sites-available/{{ config['http_host'] }}.conf
     - template: jinja
     - source: salt://bundle/nginx.conf
+    - mode: 644
     - defaults:
         config: {{ config }}
     - watch_in:
       - service: nginx
 
 {{ config['http_host'] }}-nginx-enabled:
-  file.managed:
+  file.symlink:
     - name: /etc/nginx/sites-enabled/{{ config['http_host'] }}.conf
     - target: /etc/nginx/sites-available/{{ config['http_host'] }}.conf
     - require:
