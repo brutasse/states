@@ -34,7 +34,9 @@ include:
   file.managed:
     - name: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}/requirements.txt
     - source: salt://bundle/requirements.txt
+    - template: jinja
     - makedirs: True
+    - mode: 644
     - defaults:
         config: {{ config }}
   cmd.wait:
