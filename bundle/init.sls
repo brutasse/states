@@ -105,4 +105,34 @@ include:
       - file: {{ config['http_host'] }}-nginx-available
     - require_in:
       - service: nginx
+
+{% if config['processes'] %}
+
+{% for name, command in config['processes'].iteritems() %}
+{{ config['http_host'] }}-process-{{ name }}:
+  file.managed:
+    - name: /etc/supervisor/conf.d/{{ name }}.conf
+    - template: jinja
+    - source: salt://bundle/process.conf
+    - defaults:
+        config: {{ config }}
+        process: {{ name }}
+        command: {{ command }}
+    - watch_in:
+      - cmd: {{ config['http_host'] }}-supervisor
+{% endfor %}
+
+{{ config['http_host'] }}-supervisor:
+  cmd.wait:
+    - name: supervisorctl update
+
+{{ config['http_host'] }}-gunicorn:
+  cmd.wait:
+    - name: kill -HUP `pgrep gunicorn`
+    - watch:
+      - file: {{ config['http_host'] }}-requirements
+    - require:
+      - cmd: {{ config['http_host'] }}-requirements
+
+{% endif %}
 {% endmacro %}
