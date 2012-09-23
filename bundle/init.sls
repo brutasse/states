@@ -120,6 +120,16 @@ include:
         command: {{ command }}
     - watch_in:
       - cmd: {{ config['http_host'] }}-supervisor
+
+{% if not "env/bin/gunicorn " in command %}
+{{ config['http_host'] }}-process-{{ name }}-restart:
+  cmd.wait:
+    - name: supervisorctl restart {{ name }}
+    - watch:
+      - file: {{ config['http_host'] }}-requirements
+    - require:
+      - cmd: {{ config['http_host'] }}-requirements
+{% endif %}
 {% endfor %}
 
 {{ config['http_host'] }}-supervisor:
