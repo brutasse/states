@@ -66,7 +66,6 @@ include:
     - require:
       - cmd: {{ config['http_host'] }}-db
 {% endif %}
-{% endif %}
 
 {{ config['http_host'] }}-collectstatic:
   cmd.wait:
