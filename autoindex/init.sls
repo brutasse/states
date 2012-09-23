@@ -1,6 +1,7 @@
 include:
   - supervisor
   - nginx
+  - virtualenv
 
 autoindex:
   file.directory:
