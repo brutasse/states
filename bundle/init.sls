@@ -36,7 +36,7 @@ include:
     - source: salt://bundle/requirements.txt
     - makedirs: True
     - defaults:
-        requirements: {{ config['requirements'] }}
+        config: {{ config }}
   cmd.wait:
     - name: env/bin/pip install -r requirements.txt
     - cwd: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}
