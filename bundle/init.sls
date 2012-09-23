@@ -86,4 +86,22 @@ include:
 {{ env(config['http_host'], config['env'], pillar) }}
 {% endif %}
 
+{{ config['http_host'] }}-nginx-available:
+  file.managed:
+    - name: /etc/nginx/sites-available/{{ config['http_host'] }}.conf
+    - template: jinja
+    - source: salt://bundle/nginx.conf
+    - defaults:
+        config: {{ config }}
+    - watch_in:
+      - service: nginx
+
+{{ config['http_host'] }}-nginx-enabled:
+  file.managed:
+    - name: /etc/nginx/sites-enabled/{{ config['http_host'] }}.conf
+    - target: /etc/nginx/sites-available/{{ config['http_host'] }}.conf
+    - require:
+      - file: {{ config['http_host'] }}-nginx-available
+    - require_in:
+      - service: nginx
 {% endmacro %}
