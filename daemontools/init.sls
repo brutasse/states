@@ -2,7 +2,7 @@ daemontools:
   pkg:
     - installed
 
-{% macro env(name, values) -%}
+{% macro env(name, values, pillar) -%}
 
 /etc/{{ name }}.d:
   file.directory:
