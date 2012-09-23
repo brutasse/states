@@ -6,6 +6,6 @@ include:
   - python
   - redis
 
-{% from "bunlde/init.sls" import bundle %}
+{% from "bundle/init.sls" import bundle %}
 
 {{ bundle(pillar['geoportail'], pillar) }}
