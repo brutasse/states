@@ -47,6 +47,15 @@ include:
     - watch:
       - file: {{ config['http_host'] }}-requirements
 
+{% if config['db_name'] %}
+{{ config['http_host'] }}-db:
+  cmd.run:
+    - name: createdb -E UTF8 -T template_postgis -U postgres {{ config['db_name'] }}
+    - unless: psql -ltA | grep '^{{ config['db_name'] }}|'
+    - require:
+      - cmd: postgis-template
+{% endif %}
+
 {{ config['http_host'] }}-collectstatic:
   cmd.wait:
     - name: >
@@ -57,6 +66,9 @@ include:
       - file: {{ config['http_host'] }}-requirements
     - require:
       - cmd: {{ config['http_host'] }}-requirements
+{% if config['db_name'] %}
+      - cmd: {{ config['http_host'] }}-db
+{%- endif %}
 {%- endif %}
 
 {% if config['env'] %}
