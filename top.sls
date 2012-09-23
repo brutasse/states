@@ -10,3 +10,4 @@ base:
     - pptp
     - sshd
     - postgresql.wale
+    - postgresql.postgis

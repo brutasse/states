@@ -15,3 +15,7 @@ To do so, include ``postgresql.wale`` and set some pillar data::
         WALE_S3_PREFIX: s3://some-bucket/directory/or/whatever
 
 .. _WAL-E: https://github.com/heroku/WAL-E/
+
+PostGIS is also supported. Instead of including ``postgresql``, simply include
+``postgresql.postgis``. This will create a spatial database template named
+``template_postgis``.
