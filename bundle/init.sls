@@ -51,7 +51,7 @@ include:
 {{ config['http_host'] }}-db:
   cmd.run:
     - name: createdb -E UTF8 -T template_postgis -U postgres {{ config['db_name'] }}
-    - unless: psql -ltA | grep '^{{ config['db_name'] }}|'
+    - unless: psql -U postgres -ltA | grep '^{{ config['db_name'] }}|'
     - require:
       - cmd: postgis-template
 
