@@ -14,6 +14,7 @@ postgis-template:
   cmd.run:
     - name: bash /etc/postgresql/9.1/main/postgis_template.sh
     - user: postgres
+    - cwd: /var/lib/postgresql
     - unless: psql -U postgres -l|grep template_postgis
     - require:
       - file: postgis-template
