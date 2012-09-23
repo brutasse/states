@@ -8,7 +8,6 @@ python-dev-packages:
       - dnsutils
       - gdal-bin
       - libevent-dev
-      - libevent1-dev
       - libfreetype6
       - libfreetype6-dev
       - libgeos-dev
