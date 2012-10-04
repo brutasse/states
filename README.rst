@@ -19,12 +19,6 @@ Ubuntu 12.04 LTS. They're useful for things such as:
 
 * Running a local DNS cache
 
-This configuration supports installing a modified version of Salt (mine is
-called ``salt-raven`` and logs to `Sentry`_).
-
-.. _Salt: http://saltstack.org/
-.. _Sentry: http://sentry.readthedocs.org/
-
 Installation
 ------------
 
@@ -35,13 +29,10 @@ Installation
 
       SALT_MASTER = <salt master IP>
       env.user = <your user>
-      env.package = salt-raven
       env.index_url = <your index url for pip>
 
-  (``env.package`` is optional and defaults to ``salt``).
-
-  (``env.index_url`` is optional if you're not installing a custom salt
-  package).
+  (``env.index_url`` is optional if you're fine with using the canonical
+  python package index).
 
 * Create a virtualenv and install ``Fabric`` and ``Jinja2`` in it::
 

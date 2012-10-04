@@ -12,4 +12,4 @@ salt:
     - template: jinja
     - defaults:
         salt_version: "0.10.2"
-        index_url: {{ pillar['index_url'] }}
+        index_url: {{ pillar['salt']['index_url'] }}
