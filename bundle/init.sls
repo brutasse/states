@@ -98,6 +98,7 @@ include:
 
 {% for name, command in config['processes'].iteritems() %}
 {{ config['http_host'] }}-process-{{ name }}:
+{% if command %}
   file.managed:
     - name: /etc/supervisor/conf.d/{{ name }}.conf
     - template: jinja
@@ -117,6 +118,9 @@ include:
       - file: {{ config['http_host'] }}-requirements
     - require:
       - cmd: {{ config['http_host'] }}-requirements
+{% endif %}
+{% else %}
+  file.absent
 {% endif %}
 {% endfor %}
 
