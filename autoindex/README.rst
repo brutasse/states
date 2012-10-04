@@ -20,3 +20,8 @@ If you want ``autoindex`` to report to Sentry, set ``autoindex.sentry_dsn``::
 
     autoindex:
       sentry_dsn: https://…
+
+If you want to customize the index from which autoindex is downloaded, set::
+
+    autoindex:
+      index_url: http://my.pypi.example.com/index
