@@ -1,8 +1,8 @@
 Postgresql
 ==========
 
-Installs and configures a postgresql server. Include ``postgresql`` on a
-minion.
+Installs and configures a postgresql server and its databases. Include
+``postgresql`` on a minion.
 
 Optionally you can add `WAL-E`_ for continuous archiving to your S3 account.
 To do so, include ``postgresql.wale`` and set some pillar data::
@@ -19,3 +19,17 @@ To do so, include ``postgresql.wale`` and set some pillar data::
 PostGIS is also supported. Instead of including ``postgresql``, simply include
 ``postgresql.postgis``. This will create a spatial database template named
 ``template_postgis``.
+
+To create databases, add to your pillar data::
+
+    postgresql:
+      databases:
+        - database1
+        - database2
+
+And for spatial databases::
+
+    postgresql:
+      spatial_databases:
+        - spatial1
+        - spatial2

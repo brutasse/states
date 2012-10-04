@@ -48,13 +48,6 @@ include:
       - file: {{ config['http_host'] }}-requirements
 
 {% if config['db_name'] %}
-{{ config['http_host'] }}-db:
-  cmd.run:
-    - name: createdb -E UTF8 -T template_postgis -U postgres {{ config['db_name'] }}
-    - unless: psql -U postgres -ltA | grep '^{{ config['db_name'] }}|'
-    - require:
-      - cmd: postgis-template
-
 {{ config['http_host'] }}-syncdb:
   cmd.wait:
     - name: >
@@ -63,8 +56,6 @@ include:
     - cwd: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}
     - watch:
       - file: {{ config['http_host'] }}-requirements
-    - require:
-      - cmd: {{ config['http_host'] }}-db
 {% endif %}
 
 {{ config['http_host'] }}-collectstatic:
@@ -77,9 +68,6 @@ include:
       - file: {{ config['http_host'] }}-requirements
     - require:
       - cmd: {{ config['http_host'] }}-requirements
-{% if config['db_name'] %}
-      - cmd: {{ config['http_host'] }}-db
-{%- endif %}
 {%- endif %}
 
 {% if config['env'] %}

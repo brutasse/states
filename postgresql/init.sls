@@ -33,3 +33,12 @@ postgresql-hba:
     - mode: 644
     - require:
       - pkg: postgresql
+
+{% for name in pillar['postgresql']['databases'] %}
+postgresql-database-{{ name }}:
+  cmd.run:
+    - name: createdb -E UTF8 -T template0 -U postgres {{ name }}
+    - unless: psql -U postgres -ltA | grep '^{{ name }}|'
+    - require:
+      - service: postgresql
+{% endfor %}
