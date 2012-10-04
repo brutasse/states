@@ -19,6 +19,8 @@ Ubuntu 12.04 LTS. They're useful for things such as:
 
 * Running a local DNS cache
 
+.. _Salt: http://saltstack.org/
+
 Installation
 ------------
 
