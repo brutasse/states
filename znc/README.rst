@@ -22,6 +22,7 @@ to run on and add some pillar data::
           quit_msg: Cool story bro
           server_host: chat.freenode.net
           server_port: 6667
+          server_password: (optional)
           buffer: 5000
           admin: true
           chans:
