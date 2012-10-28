@@ -137,4 +137,16 @@ include:
       - cmd: {{ pillar[config]['http_host'] }}-requirements
 
 {% endif %}
+
+{% for job in pillar[config].get('cron', []) %}
+{{ pillar[config]['http_host'] }}-{{ job['name'] }}:
+  cron.present:
+    - name: {{ job['name'] }}
+    - user: {{ pillar['user'] }}
+    - minute: {{ job.get('minute', '*') }}
+    - hour: {{ job.get('hour', '*') }}
+    - daymonth: {{ job.get('daymonth', '*') }}
+    - month: {{ job.get('month', '*') }}
+    - dayweek: {{ job.get('dayweek', '*') }}
+{% endfor %}
 {% endmacro %}
