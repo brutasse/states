@@ -9,9 +9,7 @@ base:
     - iptables
     - pptp
     - sshd
-    - certs
     - postgresql.wale
     - postgresql.postgis
     - sites.geoportail
-    - git
-    - git.deploy_keys
+    - sites.bruno.renie.fr
