@@ -143,10 +143,10 @@ include:
   cron.present:
     - name: {{ job['name'] }}
     - user: {{ pillar['user'] }}
-    - minute: {{ job.get('minute', '*') }}
-    - hour: {{ job.get('hour', '*') }}
-    - daymonth: {{ job.get('daymonth', '*') }}
-    - month: {{ job.get('month', '*') }}
-    - dayweek: {{ job.get('dayweek', '*') }}
+    - minute: "{{ job.get('minute', '*') }}"
+    - hour: "{{ job.get('hour', '*') }}"
+    - daymonth: "{{ job.get('daymonth', '*') }}"
+    - month: "{{ job.get('month', '*') }}"
+    - dayweek: "{{ job.get('dayweek', '*') }}"
 {% endfor %}
 {% endmacro %}
