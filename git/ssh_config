@@ -1,0 +1,6 @@
+{% for name, key in pillar.get('deploy_keys', {}).iteritems() %}
+Host {{ name }}.{{ key['host'] }} {{ key['host'] }}
+	Hostname {{ key['host'] }}
+	StrictHostKeyChecking no
+	IdentityFile ~/.ssh/{{ name }}_rsa
+{% endfor %}

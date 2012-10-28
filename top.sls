@@ -13,3 +13,5 @@ base:
     - postgresql.wale
     - postgresql.postgis
     - sites.geoportail
+    - git
+    - git.deploy_keys
