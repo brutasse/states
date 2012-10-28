@@ -38,7 +38,7 @@ include:
     - makedirs: True
     - mode: 644
     - defaults:
-        requirements: pillar[config]["requirements"]
+        config: {{ config }}
   cmd.wait:
     - name: env/bin/pip install -r requirements.txt
     - cwd: /home/{{ pillar['user'] }}/bundles/{{ pillar[config]['http_host'] }}
