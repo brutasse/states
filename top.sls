@@ -12,4 +12,4 @@ base:
     - postgresql.wale
     - postgresql.postgis
     - sites.geoportail
-    - sites.bruno.renie.fr
+    - sites.bruno_renie_fr
