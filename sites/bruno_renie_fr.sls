@@ -20,6 +20,7 @@ bruno.renie.fr:
     - require:
       - file: bruno.renie.fr
       - file: deploy-key-bruno.renie.fr
+      - file: sshconfig
 
 bruno.renie.fr-nginx-available:
   file.managed:

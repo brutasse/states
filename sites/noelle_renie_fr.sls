@@ -20,6 +20,7 @@ noelle.renie.fr:
     - require:
       - file: noelle.renie.fr
       - file: deploy-key-noelle.renie.fr
+      - file: sshconfig
 
 noelle.renie.fr-nginx-available:
   file.managed:
