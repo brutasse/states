@@ -13,3 +13,4 @@ base:
     - postgresql.postgis
     - sites.geoportail
     - sites.bruno_renie_fr
+    - sites.noelle_renie_fr
