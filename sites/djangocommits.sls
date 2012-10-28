@@ -29,7 +29,7 @@ djangocommits-env:
       - file: djangocommits
       - cmd: djangocommits
   cmd.run:
-    - name: {{ root }}/env/bin/pip install -r requirements.txt
+    - name: {{ root }}/env/bin/pip install -r {{ root }}/requirements.txt
     - require:
       - virtualenv: djangocommits-env
   cron.present:
