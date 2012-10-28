@@ -19,6 +19,7 @@ bruno.renie.fr:
     - unless: file {{ root }}/.git/config
     - require:
       - file: bruno.renie.fr
+      - file: deploy-key-bruno.renie.fr
 
 bruno.renie.fr-nginx-available:
   file.managed:
