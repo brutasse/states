@@ -8,4 +8,4 @@ include:
 
 {% from "bundle/init.sls" import bundle %}
 
-{{ bundle(pillar['geoportail'], pillar) }}
+{{ bundle("geoportail", pillar) }}

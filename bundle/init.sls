@@ -11,130 +11,130 @@ include:
   - python
 #}
 
-{{ config['http_host'] }}-dirs:
+{{ pillar[config]['http_host'] }}-dirs:
   file.directory:
     - names:
-      - /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}/conf
-      - /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}/log
-      - /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}/public
+      - /home/{{ pillar['user'] }}/bundles/{{ pillar[config]['http_host'] }}/conf
+      - /home/{{ pillar['user'] }}/bundles/{{ pillar[config]['http_host'] }}/log
+      - /home/{{ pillar['user'] }}/bundles/{{ pillar[config]['http_host'] }}/public
     - makedirs: True
     - user: {{ pillar['user'] }}
     - group: {{ pillar['user'] }}
 
-{% if config['requirements'] -%}
-{{ config['http_host'] }}-venv:
+{% if pillar[config]['requirements'] -%}
+{{ pillar[config]['http_host'] }}-venv:
   virtualenv.managed:
-    - name: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}/env
+    - name: /home/{{ pillar['user'] }}/bundles/{{ pillar[config]['http_host'] }}/env
     - no_site_packages: True
     - system_site_packages: False
     - require:
-      - file: {{ config['http_host'] }}-dirs
+      - file: {{ pillar[config]['http_host'] }}-dirs
 
-{{ config['http_host'] }}-requirements:
+{{ pillar[config]['http_host'] }}-requirements:
   file.managed:
-    - name: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}/requirements.txt
+    - name: /home/{{ pillar['user'] }}/bundles/{{ pillar[config]['http_host'] }}/requirements.txt
     - source: salt://bundle/requirements.txt
     - template: jinja
     - makedirs: True
     - mode: 644
     - defaults:
-        config: {{ config }}
+        requirements: pillar[config]["requirements"]
   cmd.wait:
     - name: env/bin/pip install -r requirements.txt
-    - cwd: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}
+    - cwd: /home/{{ pillar['user'] }}/bundles/{{ pillar[config]['http_host'] }}
     - require:
-      - virtualenv: {{ config['http_host'] }}-venv
+      - virtualenv: {{ pillar[config]['http_host'] }}-venv
     - watch:
-      - file: {{ config['http_host'] }}-requirements
+      - file: {{ pillar[config]['http_host'] }}-requirements
 
-{% if config['db_name'] %}
-{{ config['http_host'] }}-syncdb:
+{% if pillar[config]['db_name'] %}
+{{ pillar[config]['http_host'] }}-syncdb:
   cmd.wait:
     - name: >
-        envdir /etc/{{ config['http_host'] }}.d
+        envdir /etc/{{ pillar[config]['http_host'] }}.d
         env/bin/django-admin.py syncdb --noinput
-    - cwd: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}
+    - cwd: /home/{{ pillar['user'] }}/bundles/{{ pillar[config]['http_host'] }}
     - watch:
-      - file: {{ config['http_host'] }}-requirements
+      - file: {{ pillar[config]['http_host'] }}-requirements
 {% endif %}
 
-{{ config['http_host'] }}-collectstatic:
+{{ pillar[config]['http_host'] }}-collectstatic:
   cmd.wait:
     - name: >
-        envdir /etc/{{ config['http_host'] }}.d
+        envdir /etc/{{ pillar[config]['http_host'] }}.d
         env/bin/django-admin.py collectstatic --noinput
-    - cwd: /home/{{ pillar['user'] }}/bundles/{{ config['http_host'] }}
+    - cwd: /home/{{ pillar['user'] }}/bundles/{{ pillar[config]['http_host'] }}
     - watch:
-      - file: {{ config['http_host'] }}-requirements
+      - file: {{ pillar[config]['http_host'] }}-requirements
     - require:
-      - cmd: {{ config['http_host'] }}-requirements
+      - cmd: {{ pillar[config]['http_host'] }}-requirements
 {%- endif %}
 
-{% if config['env'] %}
-{{ env(config['http_host'], config['env'], pillar) }}
+{% if pillar[config]['env'] %}
+{{ env(pillar[config]['http_host'], pillar[config]['env'], pillar) }}
 {% endif %}
 
-{{ config['http_host'] }}-nginx-available:
+{{ pillar[config]['http_host'] }}-nginx-available:
   file.managed:
-    - name: /etc/nginx/sites-available/{{ config['http_host'] }}.conf
+    - name: /etc/nginx/sites-available/{{ pillar[config]['http_host'] }}.conf
     - template: jinja
     - source: salt://bundle/nginx.conf
     - mode: 644
     - defaults:
-        config: {{ config }}
+        config: {{ pillar[config] }}
     - watch_in:
       - service: nginx
 
-{{ config['http_host'] }}-nginx-enabled:
+{{ pillar[config]['http_host'] }}-nginx-enabled:
   file.symlink:
-    - name: /etc/nginx/sites-enabled/{{ config['http_host'] }}.conf
-    - target: /etc/nginx/sites-available/{{ config['http_host'] }}.conf
+    - name: /etc/nginx/sites-enabled/{{ pillar[config]['http_host'] }}.conf
+    - target: /etc/nginx/sites-available/{{ pillar[config]['http_host'] }}.conf
     - require:
-      - file: {{ config['http_host'] }}-nginx-available
+      - file: {{ pillar[config]['http_host'] }}-nginx-available
     - require_in:
       - service: nginx
 
-{% if config['processes'] %}
+{% if pillar[config]['processes'] %}
 
-{% for name, command in config['processes'].iteritems() %}
-{{ config['http_host'] }}-process-{{ name }}:
+{% for name, command in pillar[config]['processes'].iteritems() %}
+{{ pillar[config]['http_host'] }}-process-{{ name }}:
 {% if command %}
   file.managed:
     - name: /etc/supervisor/conf.d/{{ name }}.conf
     - template: jinja
     - source: salt://bundle/process.conf
     - defaults:
-        config: {{ config }}
+        config: {{ pillar[config] }}
         process: {{ name }}
         command: {{ command }}
     - watch_in:
-      - cmd: {{ config['http_host'] }}-supervisor
+      - cmd: {{ pillar[config]['http_host'] }}-supervisor
 
 {% if not "env/bin/gunicorn " in command %}
-{{ config['http_host'] }}-process-{{ name }}-restart:
+{{ pillar[config]['http_host'] }}-process-{{ name }}-restart:
   cmd.wait:
     - name: supervisorctl restart {{ name }}
     - watch:
-      - file: {{ config['http_host'] }}-requirements
+      - file: {{ pillar[config]['http_host'] }}-requirements
     - require:
-      - cmd: {{ config['http_host'] }}-requirements
+      - cmd: {{ pillar[config]['http_host'] }}-requirements
 {% endif %}
 {% else %}
   file.absent
 {% endif %}
 {% endfor %}
 
-{{ config['http_host'] }}-supervisor:
+{{ pillar[config]['http_host'] }}-supervisor:
   cmd.wait:
     - name: supervisorctl update
 
-{{ config['http_host'] }}-gunicorn:
+{{ pillar[config]['http_host'] }}-gunicorn:
   cmd.wait:
     - name: kill -HUP `pgrep gunicorn`
     - watch:
-      - file: {{ config['http_host'] }}-requirements
+      - file: {{ pillar[config]['http_host'] }}-requirements
     - require:
-      - cmd: {{ config['http_host'] }}-requirements
+      - cmd: {{ pillar[config]['http_host'] }}-requirements
 
 {% endif %}
 {% endmacro %}
