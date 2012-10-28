@@ -2,7 +2,7 @@
 {% for type in ['key', 'crt'] %}
 ssl-cert-{{ cert }}-{{ type }}:
   file.managed:
-    - name: /etc/ssl/{{ cert }}.{{ type }}
+    - name: /etc/ssl/private/{{ cert }}.{{ type }}
     - source: salt://certs/key
     - template: jinja
     - user: root
