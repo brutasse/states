@@ -34,6 +34,7 @@ djangocommits-env:
       - virtualenv: djangocommits-env
   cron.present:
     - name: {{ root }}/env/bin/python {{ root }}/commits.py
+    - user: {{ pillar['user'] }}
     - minutes: "30"
     - require:
       - cmd: djangocommits-env
