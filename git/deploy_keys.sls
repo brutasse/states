@@ -10,7 +10,7 @@ sshconfig:
 {% for name, key in pillar.get('deploy_keys', {}).iteritems() %}
 deploy-key-{{ name }}:
   file.managed:
-    - name: /home/{{ pillar['user'] }}/.ssh/{{ name }}_rsa:
+    - name: /home/{{ pillar['user'] }}/.ssh/{{ name }}_rsa
     - source: salt://git/key
     - template: jinja
     - defaults:
