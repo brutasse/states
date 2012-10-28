@@ -10,6 +10,11 @@ media.bruno.im:
     - group: {{ pillar['user'] }}
     - makedirs: True
 
+media.bruno.im-djangocommits:
+  file.symlink:
+    - name: {{ root }}/public/django.atom
+    - target: /home/{{ pillar['user'] }}/bundles/djangocommits/django.atom
+
 media.bruno.im-nginx-available:
   file.managed:
     - name: /etc/nginx/sites-available/media.bruno.im.conf
