@@ -12,5 +12,6 @@ base:
     - postgresql.wale
     - postgresql.postgis
     - sites.geoportail
+    - sites.dotim
     - sites.bruno_renie_fr
     - sites.noelle_renie_fr
