@@ -9,7 +9,6 @@ base:
     - iptables
     - pptp
     - sshd
-    - postgresql.wale
     - postgresql.postgis
     - sites.geoportail
     - sites.dotim
