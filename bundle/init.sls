@@ -7,7 +7,6 @@ include:
   - daemontools
   - nginx
   - postgresql.postgis
-  - postgresql.wale
   - python
 #}
 
