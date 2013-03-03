@@ -57,3 +57,8 @@ Usage
 See `salt/README.rst`_ and all the state's ``README`` files.
 
 .. _salt/README.rst: https://github.com/brutasse/states/tree/master/salt
+
+License
+-------
+
+3-clause BSD license, see the LICENSE file for details.
