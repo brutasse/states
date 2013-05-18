@@ -4,7 +4,6 @@ base:
 
   "linode.renie.fr":
     - salt.master
-    - autoindex
     - znc
     - iptables
     - pptp
