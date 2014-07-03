@@ -23,6 +23,8 @@ daemontools:
       - file: /etc/{{ name }}.d
     - order: 1
     - source: salt://daemontools/value
+    - user: {{ pillar['user'] }}
+    - group: {{ pillar['user'] }}
     - template: jinja
     - defaults:
         value: {{ value }}
